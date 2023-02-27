@@ -1,5 +1,7 @@
-function submit(){
-	document.getElementById('novo').append(document.getElementById('textBox').value);
-	document.getElementById('textBox').value = "";
-	document.getElementById('novo').append("\n");
-}
+const socket = new WebSocket('ws://localhost:8080');
+
+socket.onmessage = (event) => {
+  const value = event.data;
+  const event = new CustomEvent('input', { detail: value });
+  document.dispatchEvent(event);
+};
